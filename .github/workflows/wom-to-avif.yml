@@ -35,7 +35,9 @@ jobs:
           ls
 
       - name: Install dependencies
-        run: sudo apt -y install libjxl-tools plasma-wallpaper-dynamic
+        run: |
+          apt update
+          apt -y install libjxl-tools plasma-wallpaper-dynamic
 
       - name: Convert to PNG
         run: |
@@ -77,6 +79,8 @@ jobs:
       
       - name: Encode AVIFs
         run: |
+          cat manifest-north.json
+          cat manifest-south.json
           kdynamicwallpaperbuilder manifest-north.json --output north.avif
           kdynamicwallpaperbuilder manifest-south.json --output south.avif
 
