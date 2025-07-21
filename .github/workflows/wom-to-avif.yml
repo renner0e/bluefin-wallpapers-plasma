@@ -35,7 +35,9 @@ jobs:
           ls
 
       - name: Install dependencies
-        run: sudo apt -y install libjxl-tools plasma-wallpaper-dynamic
+        run: |
+          sudo apt update
+          sudo apt -y install libjxl-tools plasma-wallpaper-dynamic
 
       - name: Convert to PNG
         run: |
