@@ -3,11 +3,14 @@ install hemi:
     echo -e "\
     [Unit]\n\
     Description=Update Bluefin Wallpaper of the Month\n\
-    After=graphical-session.target\n\
+    After=graphical-session.target network-online.target\n\
+    Wants=network-online.target\n\
     \n\
     [Service]\n\
     Type=oneshot\n\
     ExecStart=%h/.local/bin/update-bluefin-wallpaper.sh\n\
+    WorkingDirectory=%h/.local/share/wallpapers/Bluefin\n\
+    Environment=HOME=%h\n\
     RemainAfterExit=true\n\
     \n\
     [Install]\n\
@@ -19,7 +22,6 @@ install hemi:
     #!/bin/bash\n\
     set -oux pipefail\n\
     \n\
-    cd ~/.local/share/wallpapers/Bluefin\n\
     curl -Lo {{hemi}}.md5 https://github.com/grandpares/plasma-bluefin-wallpaper/releases/latest/download/{{hemi}}.md5\n\
     md5sum --status -c {{hemi}}.md5 || curl -Lo {{hemi}}.avif https://github.com/grandpares/plasma-bluefin-wallpaper/releases/latest/download/{{hemi}}.avif\
     " > ~/.local/bin/update-bluefin-wallpaper.sh
