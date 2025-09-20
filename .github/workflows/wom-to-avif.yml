@@ -1,5 +1,5 @@
 ---
-name: Bluefin Wallpaper of the Month to Plasma
+name: Bluefin Wallpapers to Plasma
 on:
   schedule:
     - cron: '0 4 * * 1' # At 04:00 AM, only on Monday
@@ -7,85 +7,61 @@ on:
 
 jobs:
   convert-release:
-    name: Release WoM as AVIF
+    name: Convert all Bluefin Wallpapers to Plasma AVIFs
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    container: ubuntu:25.10
 
     steps:
-      - name: Get current Month
-        run: |
-          NMONTH=$(date +%-m)
-          SMONTH=$(((NMONTH + 6 - 1) % 12 + 1))
-          if [[ $NMONTH -lt 10 ]]; then
-            NMONTH="0$NMONTH"
-          fi
-          if [[ $SMONTH -lt 10 ]]; then
-            SMONTH="0$SMONTH"
-          fi
-          echo "NMONTH=$NMONTH" >> "$GITHUB_ENV"
-          echo "SMONTH=$SMONTH" >> "$GITHUB_ENV"
-      
-      - name: Download JXL for current month
-        run: |
-          curl -LO "https://github.com/ublue-os/packages/raw/refs/heads/main/packages/bluefin/wallpapers/images/$NMONTH-bluefin-day.jxl"
-          curl -LO "https://github.com/ublue-os/packages/raw/refs/heads/main/packages/bluefin/wallpapers/images/$NMONTH-bluefin-night.jxl"
-          curl -LO "https://github.com/ublue-os/packages/raw/refs/heads/main/packages/bluefin/wallpapers/images/$SMONTH-bluefin-day.jxl"
-          curl -LO "https://github.com/ublue-os/packages/raw/refs/heads/main/packages/bluefin/wallpapers/images/$SMONTH-bluefin-night.jxl"
-          ls
 
       - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt -y install libjxl-tools plasma-wallpaper-dynamic
+          export DEBIAN_FRONTEND=noninteractive
+          apt update
+          apt -y install git plasma-wallpaper-dynamic kimageformat-plugins
 
-      - name: Convert to PNG
+      - name: Download wallpapers
         run: |
-          for wallpaper in *.jxl ; do
-            echo "Processing $wallpaper"
-            djxl "$wallpaper" "${wallpaper%.*}.png"
+          set -eoux pipefail
+          git clone --depth 1 https://github.com/ublue-os/packages.git
+          cp packages/packages/bluefin/wallpapers/images/[0-9][0-9]-bluefin-*.jxl .
+
+      - name: Create Manifests
+        shell: bash
+        run: |
+          set -eoux pipefail
+          find packages/packages/bluefin/wallpapers/images/ -name '[0-9][0-9]-bluefin-night.jxl' | while read -r night_file; do
+              day_file="${night_file/night/day}"
+
+              if [[ -f "$day_file" ]]; then
+                  filename=$(basename "$night_file")
+                  NUM="${filename%%-*}"
+
+                  echo "Wallpaper: $NUM"
+                  echo "Day:   $day_file"
+                  echo "Night: $night_file"
+
+                  manifest="${NUM}-bluefin.json"
+            cat > $manifest << EOF
+          {
+            "Type": "day-night",
+            "Meta": [
+              {
+                "TimeOfDay": "day",
+                "FileName": "${NUM}-bluefin-day.jxl"
+              },
+              {
+                "TimeOfDay": "night",
+                "FileName": "${NUM}-bluefin-night.jxl"
+              }
+            ]
+          }
+          EOF
+                  mkdir -p output
+                  kdynamicwallpaperbuilder $manifest --output output/${NUM}-bluefin.avif
+              fi
           done
-
-      - name: Create manifests
-        run: |
-          cat > manifest-north.json<< EOF
-          {
-            "Type": "day-night",
-            "Meta": [
-              {
-                "TimeOfDay": "day",
-                "FileName": "$NMONTH-bluefin-day.png"
-              }, {
-                "TimeOfDay": "night",
-                "FileName": "$NMONTH-bluefin-night.png"
-              }
-            ]
-          }
-          EOF
-          cat > manifest-south.json<< EOF
-          {
-            "Type": "day-night",
-            "Meta": [
-              {
-                "TimeOfDay": "day",
-                "FileName": "$SMONTH-bluefin-day.png"
-              }, {
-                "TimeOfDay": "night",
-                "FileName": "$SMONTH-bluefin-night.png"
-              }
-            ]
-          }
-          EOF
-      
-      - name: Encode AVIFs
-        run: |
-          kdynamicwallpaperbuilder manifest-north.json --output north.avif
-          kdynamicwallpaperbuilder manifest-south.json --output south.avif
-
-      - name: Checksum
-        run: |
-          md5sum north.avif > north.md5
-          md5sum south.avif > south.md5
 
       - name: Determine tag
         id: tag
@@ -96,5 +72,6 @@ jobs:
         with:
           tag:   ${{ steps.tag.outputs.tag }}
           name:  "Automated build ${{ steps.tag.outputs.tag }}"
-          artifacts: "*.avif,*.md5"
-          token: ${{ secrets.GITHUB_TOKEN }}    
+          artifacts: "output/*.avif"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
