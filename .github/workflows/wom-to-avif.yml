@@ -64,6 +64,10 @@ jobs:
               fi
           done
 
+      - name: Create tarball
+        run: |
+          tar -czvf output/wallpapers.tar.gz output/*.avif
+
       - name: Determine tag
         id: tag
         run: echo "tag=v$(date -u +'%Y%m%d%H%M%S')" >> "$GITHUB_OUTPUT"
@@ -73,6 +77,6 @@ jobs:
         with:
           tag:   ${{ steps.tag.outputs.tag }}
           name:  "Automated build ${{ steps.tag.outputs.tag }}"
-          artifacts: "output/*.avif"
+          artifacts: "output/*.avif,output/wallpapers.tar.gz"
           token: ${{ secrets.GITHUB_TOKEN }}
 
