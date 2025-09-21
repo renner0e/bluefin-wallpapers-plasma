@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    # We need a newish version of kimageformats
-    container: docker.iubuntu:25.04
+    # We need a newish version of kimageformats, 24.04 doesn't have it
+    container: docker.io/library/ubuntu:25.04
 
     steps:
 
