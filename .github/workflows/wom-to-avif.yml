@@ -80,6 +80,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag:   ${{ steps.tag.outputs.tag }}
+          allowUpdates: true
           name:  "Automated build ${{ steps.tag.outputs.tag }}"
           artifacts: "output/*.avif,output/wallpapers.tar.gz"
           token: ${{ secrets.GITHUB_TOKEN }}
