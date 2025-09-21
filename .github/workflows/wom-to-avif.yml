@@ -65,6 +65,7 @@ jobs:
           done
 
       - name: Create tarball
+        shell: bash
         run: |
           tar -czvf output/wallpapers.tar.gz output/*.avif
 
