@@ -2,7 +2,7 @@
 name: Bluefin Wallpapers to Plasma
 on:
   schedule:
-    - cron: '0 4 * * 1' # At 04:00 AM, only on Monday
+    - cron: '0 6 1 * *' # At 06:00 AM UTC on the first of each month
   workflow_dispatch:
 
 jobs:
