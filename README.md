@@ -9,7 +9,12 @@ These files are worthless for you if you don't have this plugin.
 
 - Install https://github.com/zzag/plasma5-wallpapers-dynamic
 
-- Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases) and put them somewhere in your home directory like `~/.local/share/backgrounds/bluefin-plasma-dynamic/`
+> [!WARNING]
+> This directory path is not a suggestion, they have to be in `~/.local/share/wallpapers` somewhere
+
+- Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases) and put them here `~/.local/share/wallpapers/bluefin-plasma-dynamic/`
+
+
 
 - Open Settings > Appearance & Style > Wallpaper and set "Wallpaper type" to "Dynamic"
 
