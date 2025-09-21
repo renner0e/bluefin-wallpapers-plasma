@@ -67,7 +67,7 @@ jobs:
       - name: Create tarball
         shell: bash
         run: |
-          tar -czvf output/wallpapers.tar.gz output/*.avif
+          cd output && tar -czvf wallpapers.tar.gz *.avif
 
       - name: Determine tag
         id: tag
