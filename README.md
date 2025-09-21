@@ -1,17 +1,20 @@
 ## About
-Monthy Bluefin dynamic wallpapers repackaged for Plasma 6
-## Installation
-Uses [Just](https://github.com/casey/just) (pre-packaged with uBlue)
-```
-curl -LO https://github.com/grandpares/plasma-bluefin-wallpaper/raw/refs/heads/main/Justfile && just install <hemi>
-```
-where \<hemi\> is your hemisphere (north/south).
+These are all the cool Bluefin Wallpapers converted in a way so [this KDE Wallpaper plugin](https://github.com/zzag/plasma5-wallpapers-dynamic) can do something useful with it.
 
-Wallpaper is selectable in Wallpapers-Dynamic
+You will get a wallpaper that changes dynmaically depending on your local time.
 
-To remove, run 
-```
-curl -LO https://github.com/grandpares/plasma-bluefin-wallpaper/raw/refs/heads/main/Justfile && just uninstall
-```
+
+## How to use
+
+- Install https://github.com/zzag/plasma5-wallpapers-dynamic
+
+- Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases) and put them somewhere in your home directory like `~/.local/share/backgrounds/bluefin-plasma-dynamic/`
+
+- Open Settings > Appearance & Style > Wallpaper and set "Wallpaper type" to "Dynamic"
+
+> [!WARNING]
+> You have to set your wallpaper type as dynamic, the default type won't work and the actual file will display, resulting in a loop between day and night!
+
+
 ## Attributions
 Dinosaur images are comissioned by the uBlue maintainers and made available under the Apache License 2.0 in the [corresponding repo](https://github.com/ublue-os/packages)
