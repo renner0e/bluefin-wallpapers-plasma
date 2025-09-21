@@ -1,6 +1,9 @@
 ---
 name: Bluefin Wallpapers to Plasma
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 6 1 * *' # At 06:00 AM UTC on the first of each month
   workflow_dispatch:
