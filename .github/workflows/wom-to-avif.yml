@@ -70,7 +70,7 @@ jobs:
 
       - name: Determine tag
         id: tag
-        run: echo "tag=v$(date -u +'%Y%m%d%H%M%S')" >> "$GITHUB_OUTPUT"
+        run: echo "tag=v$(date --iso-8601=date)" >> "$GITHUB_OUTPUT"
 
       - name: Publish release
         uses: ncipollo/release-action@v1
