@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -eoux pipefail
-          find packages/packages/bluefin/wallpapers/images/ -name '[0-9][0-9]-bluefin-night.jxl' | while read -r night_file; do
+          find packages/packages/bluefin/wallpapers/images/ -name '[0-9][0-9]-bluefin-night.jxl' | sort | while read -r night_file; do
               day_file="${night_file/night/day}"
 
               if [[ -f "$day_file" ]]; then
@@ -59,7 +59,7 @@ jobs:
           }
           EOF
                   mkdir -p output
-                  kdynamicwallpaperbuilder $manifest --output output/${NUM}-bluefin.avif
+                  kdynamicwallpaperbuilder --speed 8 $manifest --output output/${NUM}-bluefin.avif
               fi
           done
 
