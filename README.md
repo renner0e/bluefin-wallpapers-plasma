@@ -3,7 +3,7 @@ These are all the cool Bluefin Wallpapers converted in a way so [this KDE Wallpa
 
 You will get a wallpaper that changes the lighting dynamically depending on your time.
 
-These files are worthless for you if you don't have this plugin.
+**These files are all worthless for you if you don't have this plugin made for KDE Plasma.**
 
 ## How to use
 
@@ -14,15 +14,12 @@ These files are worthless for you if you don't have this plugin.
 
 - Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases) and put them here `~/.local/share/wallpapers/bluefin-plasma-dynamic/`
 
-
-
 - Open Settings > Appearance & Style > Wallpaper and set "Wallpaper type" to "Dynamic"
 
 ![Screenshot](showcase.png)
 
 > [!WARNING]
 > You have to set your wallpaper type as dynamic, the default type won't work and the actual file will display, resulting in a loop between day and night!
-
 
 ## Attributions
 Dinosaur images are comissioned by the uBlue maintainers and made available under the Apache License 2.0 in the [corresponding repo](https://github.com/ublue-os/packages)
