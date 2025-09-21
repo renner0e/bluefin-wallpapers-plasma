@@ -1,8 +1,9 @@
 ## About
 These are all the cool Bluefin Wallpapers converted in a way so [this KDE Wallpaper plugin](https://github.com/zzag/plasma5-wallpapers-dynamic) can do something useful with it.
 
-You will get a wallpaper that changes dynmaically depending on your local time.
+You will get a wallpaper that changes dynamically depending on your local time.
 
+These files are worthless for you if you don't have this plugin.
 
 ## How to use
 
