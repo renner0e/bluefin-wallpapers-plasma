@@ -13,6 +13,8 @@ These files are worthless for you if you don't have this plugin.
 
 - Open Settings > Appearance & Style > Wallpaper and set "Wallpaper type" to "Dynamic"
 
+![Screenshot](showcase.png)
+
 > [!WARNING]
 > You have to set your wallpaper type as dynamic, the default type won't work and the actual file will display, resulting in a loop between day and night!
 
