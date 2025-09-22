@@ -19,7 +19,7 @@ brew install --cask bluefin-wallpapers-plasma-dynamic
 
 OR 
 
-- Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases/latest/download/wallpapers.tar.gz) and put them here `~/.local/share/wallpapers/bluefin-plasma-dynamic/`
+Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases/latest/download/wallpapers.tar.gz) and put them in `~/.local/share/wallpapers/bluefin-plasma-dynamic/`
 
 - Open Settings > Appearance & Style > Wallpaper and set "Wallpaper type" to "Dynamic"
 
