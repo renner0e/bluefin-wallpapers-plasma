@@ -12,7 +12,14 @@ You will get a wallpaper that changes the lighting dynamically depending on your
 > [!WARNING]
 > This directory path is not a suggestion, they have to be in `~/.local/share/wallpapers` somewhere
 
-- Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases) and put them here `~/.local/share/wallpapers/bluefin-plasma-dynamic/`
+```bash
+brew tap ublue-os/tap
+brew install --cask bluefin-wallpapers-plasma-dynamic
+```
+
+OR 
+
+- Download all the wallpapers from the [github releases page](https://github.com/renner0e/plasma-bluefin-wallpaper/releases/latest/download/wallpapers.tar.gz) and put them here `~/.local/share/wallpapers/bluefin-plasma-dynamic/`
 
 - Open Settings > Appearance & Style > Wallpaper and set "Wallpaper type" to "Dynamic"
 
