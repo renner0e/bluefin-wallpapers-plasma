@@ -9,13 +9,6 @@ You will get a wallpaper that changes the lighting dynamically depending on your
 
 - Install https://github.com/zzag/plasma5-wallpapers-dynamic
 
-```bash
-brew tap ublue-os/tap
-brew install --cask bluefin-wallpapers-plasma-dynamic
-```
-
-OR
-
 > [!WARNING]
 > This directory path is not a suggestion, they have to be in `~/.local/share/wallpapers` somewhere
 
